@@ -34,6 +34,7 @@ app.post('/refresh', (req, res) => {
 
 app.post('/login', (req, res) => {
   const code = req.body.code
+  console.log('🚀 ~ file: index.js ~ line 37 ~ app.post ~ code', code)
   const spotifyApi = new spotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,

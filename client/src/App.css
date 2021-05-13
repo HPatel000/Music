@@ -140,3 +140,532 @@ body {
   transform: scaleY(1);
   width: 100%;
 }
+
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+/* *********MAIN CONTENT******** */
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+.home {
+  overflow-y: scroll;
+  flex-grow: 1;
+}
+.mainContainer {
+  overflow-y: scroll;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.mainContainer h2 {
+  height: 25%;
+  color: var(--yellow);
+  font-size: var(--fontsize1);
+  padding: 4rem;
+  font-weight: 300;
+}
+
+.cardContainer {
+  padding: 0 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-gap: 3rem;
+}
+
+/* ************************************** */
+/* **************INFO CARD*************** */
+/* ************************************** */
+
+.infocard {
+  position: relative;
+  background-color: rgba(var(--DARK), 0.8);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  box-shadow: 0px 5px 15px 0px rgba(var(--DARK), 0.5);
+  transition: background-color 0.2s ease-in-out;
+}
+.infocard img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0px 5px 15px 0px rgba(var(--DARK), 0.5);
+}
+
+.infocard h4 {
+  width: 80%;
+  text-align: start;
+  font-size: var(--fontsize2);
+  margin-bottom: 0.5rem;
+  color: var(--grey);
+  font-weight: 600;
+}
+
+.infocard p {
+  text-align: start;
+  color: var(--grey);
+  font-size: var(--fontsize4);
+  font-weight: normal;
+}
+
+.infocardPlayBtn {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  border-radius: 50%;
+  opacity: 0;
+  color: var(--grey);
+  transform: scale(3);
+  background-color: transparent;
+  z-index: 10;
+  transition: opacity 0.2s ease-in !important;
+}
+
+.infocardPlayBtn:hover {
+  color: var(--yellow);
+}
+
+.infocard:hover .infocardPlayBtn {
+  opacity: 1;
+}
+
+.infocard:hover {
+  background-color: rgba(var(--DARK), 0.7);
+}
+
+.newPlaylistBtn {
+  width: max-content;
+  margin-left: 4rem;
+  padding: 1rem 2rem;
+  margin-top: 4rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: var(--yellow);
+  color: var(--dark);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10rem;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px 0px rgba(var(--DARK), 0.5);
+}
+
+.newPlaylistBtnIcon {
+  color: #e50185;
+  transform: scale(2);
+  margin-right: 0.5rem;
+}
+
+.newPlaylistBtn:focus {
+  outline: none;
+  transform: scale(1.1);
+}
+
+.newPlaylistBtn:active {
+  outline: none;
+  box-shadow: 0px 5px 10px 0px rgba(var(--DARK), 0.9);
+}
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+/* ************Songs************ */
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+.songs {
+  overflow-y: scroll;
+  flex-grow: 1;
+}
+
+.songs h2 {
+  display: inline-block;
+  height: 25%;
+  padding: 4rem;
+  font-size: var(--fontsize1);
+  color: var(--yellow);
+  font-weight: 300;
+}
+
+.playListBtn {
+  margin-bottom: 0.5rem;
+  color: var(--grey);
+  transform: scale(4);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.playListBtn:hover {
+  color: var(--yellow);
+  transform: scale(4.5);
+}
+
+.songsList {
+  margin-bottom: 10rem;
+  padding: 0 4rem;
+}
+
+.songInfo {
+  position: relative;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  background-color: rgba(var(--DARK), 0.5);
+  border-radius: 0.5rem;
+  align-items: center;
+  justify-items: center;
+  font-size: var(--fontsize3);
+  color: var(--grey);
+}
+
+/* .songInfo:hover {
+  cursor: pointer;
+  color: var(--yellow);
+  font-weight: 400;
+} */
+
+.songImg {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 3px;
+  grid-column: 1 / 2;
+  justify-self: start;
+  background-size: cover;
+}
+
+.songName {
+  grid-column: 2 / 8;
+  margin-left: 2rem;
+  justify-self: start;
+  font-weight: inherit;
+  cursor: pointer;
+}
+.songName:hover {
+  font-weight: 400;
+  color: var(--yellow);
+}
+.songName small {
+  font-size: var(--fontsize4);
+  font-weight: inherit;
+  color: rgba(var(--GREY), 0.7);
+}
+.songName small:not(:last-child)::after {
+  content: ', ';
+}
+
+.songDuration {
+  grid-column: 9 / 10;
+  font-weight: inherit;
+}
+
+.songLikeBtn {
+  transform: scale(2);
+  grid-column: 11;
+  cursor: pointer;
+}
+
+.songLiked {
+  color: var(--yellow);
+}
+
+.songLikeBtn:active {
+  animation: pop 0.2s ease-in-out;
+}
+
+.songAddToPlaylist {
+  position: relative;
+  grid-column: 12;
+  transform: scale(2);
+  cursor: pointer;
+  color: rgba(var(--GREY), 0.5);
+}
+
+.dropup {
+  position: relative;
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 1.5rem;
+  padding-left: 0;
+  cursor: pointer;
+}
+
+.dropupContent {
+  display: none;
+  position: absolute;
+  color: var(--dark);
+  top: -15rem;
+  right: 30px;
+  min-width: max-content;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  outline: 1px solid rgba(var(--GREY), 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.dropupContent button {
+  display: block;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  background-color: rgba(var(--GREY), 0.3);
+  color: var(--yellow);
+  transition: background-color 0.2s ease-in-out;
+}
+.dropupContent button:not(:last-child) {
+  border-bottom: 1px solid rgba(var(--GREY), 0.3);
+}
+
+.dropupContent button:hover,
+.dropupContent button:focus,
+.dropupContent button:active {
+  outline: none;
+  background-color: rgba(var(--GREY), 0.5) !important;
+}
+
+.dropupContent button small {
+  color: var(--dark);
+}
+
+.dropup:hover .dropupContent {
+  display: block;
+}
+
+.dropup:hover .songAddToPlaylist {
+  color: var(--grey);
+}
+
+.removeFromPlaylistButton {
+  color: rgba(var(--DARK), 0.9) !important;
+}
+
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+/* ***********SEARCH************ */
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+.search {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+.searchHeader {
+  height: 25%;
+  padding: 4rem;
+}
+
+.search h2 {
+  font-size: var(--fontsize1);
+  color: var(--yellow);
+  font-weight: 300;
+}
+
+.search input {
+  float: right;
+  margin-top: -4rem;
+  margin-right: 4rem;
+  padding: 1rem 3rem;
+  height: 4rem;
+  width: 50%;
+  font-size: 1.5rem;
+  border-radius: 5rem;
+  background-color: rgba(var(--GREY), 0.8);
+  color: var(--dark);
+  border: none;
+  box-shadow: 5px 5px 20px 0px rgba(var(--DARK), 0.5);
+  transition: all 0.2s ease-in-out;
+}
+.search input:focus {
+  outline: none;
+  background-color: var(--grey);
+}
+.searchBtn {
+  float: right;
+  margin-top: -3.5rem;
+  margin-right: 4.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(var(--DARK), 0.9);
+  color: var(--yellow);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.search button:focus {
+  outline: none;
+  background-color: var(--dark);
+}
+
+.search .searchIcon {
+  transform: scale(1.3);
+}
+
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+/* ***********SCROLLBAR********* */
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+.mainContainer::-webkit-scrollbar-track,
+.home::-webkit-scrollbar-track,
+.songs::-webkit-scrollbar-track,
+.search::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.mainContainer::-webkit-scrollbar,
+.home::-webkit-scrollbar,
+.songs::-webkit-scrollbar,
+.search::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.mainContainer::-webkit-scrollbar-thumb,
+.home::-webkit-scrollbar-thumb,
+.songs::-webkit-scrollbar-thumb,
+.search::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 1px var(--grey);
+  background-color: rgba(var(--GREY), 0.3);
+}
+
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+/* **********ANIMATIONS********* */
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+
+@keyframes pop {
+  0% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(2.5);
+    fill: var(--pink);
+  }
+  100% {
+    transform: scale(2);
+  }
+}
+
+@keyframes modal {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 80%;
+  }
+  100% {
+    top: 50%;
+  }
+}
+
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+/* *************MODAL*********** */
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+
+.modal {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(var(--DARK), 0.5);
+  backdrop-filter: blur(5px);
+  color: var(--dark);
+}
+
+.modalShow {
+  display: block;
+}
+
+.modalHide {
+  display: none;
+}
+
+.modalContent {
+  position: inherit;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -80%);
+  font-size: 2rem;
+  background-color: rgba(var(--GREY), 0.5);
+  padding: 3rem 6rem 3rem 3rem;
+  width: max-content;
+  outline: 5px solid rgba(var(--GREY), 0.8);
+  outline-offset: 5px;
+  box-shadow: 5px 5px 15px 0 rgba(var(--GREY), 0.1);
+  animation: modal 0.2s ease-in-out;
+}
+
+.newPlaylistForm label {
+  font-weight: bold;
+}
+
+.newPlaylistForm input {
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  padding: 0.5rem;
+  background-color: rgba(var(--DARK), 0.1);
+  border: none;
+  border-bottom: 2px solid var(--dark);
+  border-radius: 0.2rem;
+  transition: background-color 0.2s ease-in-out;
+}
+.newPlaylistForm input:focus {
+  outline: none;
+  background-color: rgba(var(--DARK), 0.2);
+}
+
+.newPlaylistForm button {
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+  background-color: var(--dark);
+  border: none;
+  font-size: 2rem;
+  color: var(--grey);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.newPlaylistForm button:focus,
+.newPlaylistForm button:hover {
+  box-shadow: 0px 0px 10px 0px rgba(var(--DARK), 0.5);
+}
+
+.modalClose {
+  position: absolute;
+  right: -2.5rem;
+  top: -2.5rem;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  background-color: rgba(var(--DARK), 0.7);
+  backdrop-filter: blur(5px);
+  color: var(--grey);
+  border: none;
+  float: right;
+  font-size: 4rem;
+  font-weight: light;
+  cursor: pointer;
+}
+
+.modalClose:hover,
+.modalClose:focus {
+  outline: none;
+  background-color: var(--dark);
+}
