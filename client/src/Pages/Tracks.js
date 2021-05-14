@@ -6,14 +6,26 @@ import Song from '../components/Song'
 import GlobalContext from '../context/GlobalContext'
 
 const Tracks = props => {
-  const { id } = useParams()
-  const { getSongsFromPlaylist, playlistTracks } = useContext(GlobalContext)
+  const { id, type } = useParams()
+  const {
+    getSongsFromPlaylist,
+    playlistTracks,
+    getArtistsTopSongs,
+    artistsTopTracks,
+  } = useContext(GlobalContext)
   const [tracks, setTracks] = useState(null)
   const [title, setTitle] = useState(null)
   const [img, setImg] = useState(null)
   useEffect(() => {
-    getSongsFromPlaylist(id)
-    setTracks(playlistTracks)
+    if (type === 'playlist') {
+      console.log('playlist')
+      getSongsFromPlaylist(id)
+      setTracks(playlistTracks)
+    }
+    if (type === 'artist') {
+      getArtistsTopSongs(id)
+      setTracks(artistsTopTracks)
+    }
     setTitle(props.location.data[0])
     setImg(props.location.data[1])
   }, [id])
@@ -21,18 +33,35 @@ const Tracks = props => {
     <Fragment>
       <Navbar />
       <div className='songs'>
-        <img src={img} alt='' />
-        <h2>{title}</h2>
-        <PlayCircleFilledRounded className='playListBtn' />
+        <div className='songsHeading'>
+          <img src={img} alt='' />
+          <h2>{title}</h2>
+          <PlayCircleFilledRounded className='playListBtn' />
+        </div>
         <div className='songsList'>
-          {playlistTracks?.map(item => (
-            <Song
-              key={item.track.id}
-              songInfo={item.track}
-              currPlaylistId={id}
-              setTracks={setTracks}
-            />
-          ))}
+          {type === 'playlist' ? (
+            <Fragment>
+              {playlistTracks?.map(item => (
+                <Song
+                  key={item.track.id}
+                  songInfo={item.track}
+                  currPlaylistId={id}
+                  setTracks={setTracks}
+                />
+              ))}
+            </Fragment>
+          ) : (
+            <Fragment>
+              {artistsTopTracks?.map(item => (
+                <Song
+                  key={item.id}
+                  songInfo={item}
+                  currPlaylistId={id}
+                  setTracks={setTracks}
+                />
+              ))}
+            </Fragment>
+          )}
         </div>
       </div>
     </Fragment>

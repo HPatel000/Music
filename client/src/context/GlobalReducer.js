@@ -6,11 +6,23 @@ export default (state, action) => {
         ...state,
         user: action.payload,
       }
+    case 'SET_TOKEN':
+      console.log(action.payload)
+      return {
+        ...state,
+        token: action.payload,
+      }
     case 'SET_TOP_ARTISTS':
       console.log(action.payload)
       return {
         ...state,
         userTopArtists: action.payload,
+      }
+    case 'SET_ARTISTS_TOP_TRACKS':
+      console.log(action.payload)
+      return {
+        ...state,
+        artistsTopTracks: action.payload,
       }
     case 'SET_TOP_TRACKS':
       console.log(action.payload)

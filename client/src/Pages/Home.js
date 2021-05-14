@@ -7,6 +7,7 @@ import Song from '../components/Song'
 const Home = () => {
   const {
     user,
+    token,
     getUser,
     getUserTopArtists,
     userTopArtists,
@@ -14,10 +15,12 @@ const Home = () => {
     userTopTracks,
   } = useContext(GlobalContext)
   useEffect(() => {
-    getUser()
-    getUserTopArtists()
-    getUserTopTracks()
-  }, [])
+    if (token !== null) {
+      getUser()
+      getUserTopArtists()
+      getUserTopTracks()
+    }
+  }, [token])
   return (
     <Fragment>
       <Navbar />

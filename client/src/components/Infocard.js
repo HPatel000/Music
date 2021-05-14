@@ -10,7 +10,7 @@ const Infocard = ({ img, name, type, id }) => {
       <p>{type}</p>
       <Link
         to={{
-          pathname: `/playlists/${id}`,
+          pathname: `/${type}/${id}`,
           data: [name, img],
         }}
       >

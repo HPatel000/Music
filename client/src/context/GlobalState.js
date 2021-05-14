@@ -5,6 +5,7 @@ import SpotifyWebApi from 'spotify-web-api-js'
 
 const GlobalState = props => {
   const initialState = {
+    token: null,
     loading: false,
     user: null,
     userPlaylist: null,
@@ -13,6 +14,7 @@ const GlobalState = props => {
     searchResult: null,
     playlistTracks: null,
     currPlaylistId: null,
+    artistsTopTracks: null,
   }
 
   const [state, dispatch] = useReducer(GlobalReducer, initialState)
@@ -25,6 +27,10 @@ const GlobalState = props => {
       accessToken
     )
     spotify.setAccessToken(accessToken)
+    dispatch({
+      type: 'SET_TOKEN',
+      payload: accessToken,
+    })
     console.log('**************')
   }
 
@@ -74,6 +80,16 @@ const GlobalState = props => {
       dispatch({
         type: 'SET_PLAYLIST_SONGS',
         payload: tracks.items,
+      })
+    })
+  }
+
+  const getArtistsTopSongs = id => {
+    console.log("Getting artist's songs ...")
+    spotify.getArtistTopTracks(id, 'IN').then(tracks => {
+      dispatch({
+        type: 'SET_ARTISTS_TOP_TRACKS',
+        payload: tracks.tracks,
       })
     })
   }
@@ -129,7 +145,7 @@ const GlobalState = props => {
     }
     seconds = Math.floor(seconds % 60)
     seconds = seconds >= 10 ? seconds : '0' + seconds
-    if (hours != '') {
+    if (hours !== '') {
       return hours + ':' + minutes + ':' + seconds
     }
     return minutes + ':' + seconds
@@ -138,6 +154,7 @@ const GlobalState = props => {
   return (
     <GlobalContext.Provider
       value={{
+        token: state.token,
         loading: state.loading,
         user: state.user,
         userPlaylist: state.userPlaylist,
@@ -146,11 +163,13 @@ const GlobalState = props => {
         searchResult: state.searchResult,
         playlistTracks: state.playlistTracks,
         currPlaylistId: state.currPlaylistId,
+        artistsTopTracks: state.artistsTopTracks,
         getTime,
         setToken,
         getUser,
         getUserTopArtists,
         getUserTopTracks,
+        getArtistsTopSongs,
         searchSong,
         getUserPlaylists,
         getSongsFromPlaylist,

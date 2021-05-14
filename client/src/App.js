@@ -23,7 +23,8 @@ function App() {
       {code ? (
         <Router>
           <Switch>
-            <Route exact path='/playlists/:id' component={Tracks} />
+            <Route exact path='/:type/:id' component={Tracks} />
+            <Route exact path='/:type/:id' component={Tracks} />
             <Route exact path='/search' component={Search} />
             <Route exact path='/playlists' component={Playlists} />
             <Route exact path='/' component={Home} />
