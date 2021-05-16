@@ -1,24 +1,22 @@
-import React, { Fragment, useContext, useEffect } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import GlobalContext from '../context/GlobalContext'
 import Navbar from '../components/Navbar'
 import Infocard from '../components/Infocard'
 import Song from '../components/Song'
 
 const Home = () => {
-  const {
-    user,
-    token,
-    getUser,
-    getUserTopArtists,
-    userTopArtists,
-    getUserTopTracks,
-    userTopTracks,
-  } = useContext(GlobalContext)
+  const { token, spotifyApi, getUserPlaylists } = useContext(GlobalContext)
+  const [userTopArtists, setUserTopArtists] = useState(null)
+  const [userTopTracks, setUserTopTracks] = useState(null)
   useEffect(() => {
     if (token !== null) {
-      getUser()
-      getUserTopArtists()
-      getUserTopTracks()
+      spotifyApi.getMyTopArtists().then(artists => {
+        setUserTopArtists(artists)
+      })
+      spotifyApi.getMyTopTracks().then(tracks => {
+        setUserTopTracks(tracks.items)
+      })
+      getUserPlaylists()
     }
   }, [token])
   return (
@@ -29,13 +27,7 @@ const Home = () => {
           <h2>Top Artists</h2>
           <div className='cardContainer'>
             {userTopArtists?.items.map(artist => (
-              <Infocard
-                key={artist.id}
-                img={artist.images[0]?.url}
-                name={artist.name}
-                type={artist.type}
-                id={artist.id}
-              />
+              <Infocard key={artist.id} cardInfo={artist} />
             ))}
           </div>
         </div>

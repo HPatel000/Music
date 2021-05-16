@@ -7,28 +7,31 @@ import GlobalContext from '../context/GlobalContext'
 
 const Tracks = props => {
   const { id, type } = useParams()
-  const {
-    getSongsFromPlaylist,
-    playlistTracks,
-    getArtistsTopSongs,
-    artistsTopTracks,
-  } = useContext(GlobalContext)
+  const { spotifyApi } = useContext(GlobalContext)
+
+  const [something, setSomething] = useState('something')
   const [tracks, setTracks] = useState(null)
   const [title, setTitle] = useState(null)
   const [img, setImg] = useState(null)
+
   useEffect(() => {
     if (type === 'playlist') {
       console.log('playlist')
-      getSongsFromPlaylist(id)
-      setTracks(playlistTracks)
+      console.log('getting songs from playlist...')
+      spotifyApi.getPlaylistTracks(id).then(tracks => {
+        setTracks(tracks.items)
+      })
     }
     if (type === 'artist') {
-      getArtistsTopSongs(id)
-      setTracks(artistsTopTracks)
+      console.log("Getting artist's songs ...")
+      spotifyApi.getArtistTopTracks(id, 'IN').then(tracks => {
+        setTracks(tracks.tracks)
+      })
     }
     setTitle(props.location.data[0])
     setImg(props.location.data[1])
-  }, [id])
+  }, [something])
+
   return (
     <Fragment>
       <Navbar />
@@ -41,23 +44,23 @@ const Tracks = props => {
         <div className='songsList'>
           {type === 'playlist' ? (
             <Fragment>
-              {playlistTracks?.map(item => (
+              {tracks?.map(item => (
                 <Song
                   key={item.track.id}
                   songInfo={item.track}
                   currPlaylistId={id}
-                  setTracks={setTracks}
+                  setSomething={setSomething}
                 />
               ))}
             </Fragment>
           ) : (
             <Fragment>
-              {artistsTopTracks?.map(item => (
+              {tracks?.map(item => (
                 <Song
                   key={item.id}
                   songInfo={item}
                   currPlaylistId={id}
-                  setTracks={setTracks}
+                  setTracks={null}
                 />
               ))}
             </Fragment>

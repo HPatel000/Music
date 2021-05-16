@@ -1,11 +1,16 @@
 import React from 'react'
-import { HomeRounded, PlaylistPlay, SearchRounded } from '@material-ui/icons'
+import {
+  HomeRounded,
+  PlaylistPlayRounded,
+  QueueMusicRounded,
+  SearchRounded,
+} from '@material-ui/icons'
 import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
   return (
     <div className='navbar'>
-      <h1>Music 🎼</h1>
+      <h1>Music</h1>
       <div className='navItems'>
         <NavLink
           exact
@@ -39,8 +44,20 @@ const Navbar = () => {
         >
           <p className='navLink'>
             {' '}
-            <PlaylistPlay className='navIcons' />
+            <PlaylistPlayRounded className='navIcons' />
             Playlist
+          </p>
+        </NavLink>
+        <NavLink
+          exact
+          activeClassName='navItemActive'
+          className='navItem'
+          to='/shows'
+        >
+          <p className='navLink'>
+            {' '}
+            <QueueMusicRounded className='navIcons' />
+            Shows
           </p>
         </NavLink>
       </div>

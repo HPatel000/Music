@@ -59,16 +59,21 @@ body {
 
 .Login h1 {
   font-size: var(--fontsize1);
+  margin: 3rem;
 }
 
 .Login a {
   text-decoration: none;
-  color: var(--pink);
+  color: var(--dark);
   background-color: var(--yellow);
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   border-radius: 20rem;
   font-size: var(--fontsize2);
   font-weight: 600;
+}
+
+.Login a:hover {
+  box-shadow: 2px 2px 5px var(--dark);
 }
 
 /* ***************************** */
@@ -144,7 +149,7 @@ body {
 /* ***************************** */
 /* ***************************** */
 /* ***************************** */
-/* *********MAIN CONTENT******** */
+/* *********MAIN CONTAINER******** */
 /* ***************************** */
 /* ***************************** */
 /* ***************************** */
@@ -183,6 +188,7 @@ body {
   position: relative;
   background-color: rgba(var(--DARK), 0.8);
   padding: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.5rem;
   text-align: center;
   box-shadow: 0px 5px 15px 0px rgba(var(--DARK), 0.5);
@@ -284,10 +290,7 @@ body {
   display: flex;
   align-items: flex-end;
   padding: 4rem;
-  background: linear-gradient(
-    rgba(var(--YELLOW), 0.35) 25%,
-    rgba(var(--PINK), 0.75)
-  );
+  background: linear-gradient(rgba(var(--YELLOW), 0.35) 25%, transparent);
 }
 
 .songsHeading img {
@@ -408,6 +411,7 @@ body {
   padding: 1.5rem;
   padding-left: 0;
   cursor: pointer;
+  z-index: 10;
 }
 
 .dropupContent {
@@ -471,52 +475,89 @@ body {
   flex-grow: 1;
   overflow-y: scroll;
 }
+
 .searchHeader {
-  height: 25%;
   padding: 4rem;
 }
 
-.search h2 {
+/* .search h2 {
   font-size: var(--fontsize1);
   color: var(--yellow);
   font-weight: 300;
-}
+} */
 
 .search input {
-  float: right;
-  margin-top: -4rem;
-  margin-right: 4rem;
+  margin-right: 2rem;
   padding: 1rem 3rem;
-  height: 4rem;
   width: 50%;
-  font-size: 1.5rem;
+  font-size: 2rem;
   border-radius: 5rem;
   background-color: rgba(var(--GREY), 0.8);
   color: var(--dark);
   border: none;
-  box-shadow: 5px 5px 20px 0px rgba(var(--DARK), 0.5);
+  box-shadow: 0px 5px 10px 0px rgba(var(--DARK), 0.5);
   transition: all 0.2s ease-in-out;
 }
+
 .search input:focus {
   outline: none;
   background-color: var(--grey);
+  width: 75%;
 }
+
+.categorySearchTitle {
+  padding: 4rem;
+  font-size: var(--fontsize1);
+  color: var(--yellow);
+  font-weight: normal;
+}
+
+.categoryCardContainer {
+  padding: 4rem;
+  padding-top: 0rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-gap: 1rem;
+}
+
+.categoryCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgba(var(--DARK), 0.5);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.categoryCard:hover {
+  cursor: pointer;
+  background-color: rgba(var(--DARK), 0.7);
+}
+
+.categoryCard img {
+  width: 5rem;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.categoryCard p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--grey);
+}
+
 .searchBtn {
-  float: right;
-  margin-top: -3.5rem;
-  margin-right: 4.5rem;
-  width: 3rem;
-  height: 3rem;
+  margin-left: -5rem;
   border-radius: 50%;
   border: none;
-  background-color: rgba(var(--DARK), 0.9);
-  color: var(--yellow);
-  transform: scale(1.1);
+  background-color: transparent;
+  color: var(--dark);
+  transform: scale(1.5);
   cursor: pointer;
 }
 .search button:focus {
   outline: none;
-  background-color: var(--dark);
+  color: var(--pink);
 }
 
 .search .searchIcon {

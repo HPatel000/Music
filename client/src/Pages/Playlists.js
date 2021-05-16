@@ -5,9 +5,10 @@ import Navbar from '../components/Navbar'
 import GlobalContext from '../context/GlobalContext'
 
 const Playlists = () => {
-  const { getUserPlaylists, userPlaylist, makeNewPlaylist } =
+  const { spotifyApi, user, userPlaylist, getUserPlaylists } =
     useContext(GlobalContext)
   const [modalDisplay, setModalDisplay] = useState(false)
+  // const [userPlaylist, setUserPLaylist] = useState(null)
   const [newPlaylistInfo, setNewPlaylistInfo] = useState({
     name: '',
     description: '',
@@ -15,9 +16,26 @@ const Playlists = () => {
   })
   const onChange = e =>
     setNewPlaylistInfo({ ...newPlaylistInfo, [e.target.name]: e.target.value })
-  useEffect(() => {
-    getUserPlaylists()
-  }, [])
+  const makeNewPlaylist = e => {
+    e.preventDefault()
+    console.log(newPlaylistInfo)
+    spotifyApi
+      .createPlaylist(user?.id, {
+        name: newPlaylistInfo.name,
+        description: newPlaylistInfo.description,
+        public: newPlaylistInfo.public,
+      })
+      .then(res => {
+        console.log(res)
+        getUserPlaylists()
+      })
+  }
+  // useEffect(() => {
+  //   spotifyApi.getUserPlaylists(user?.id).then(playlists => {
+  //     setUserPLaylist(playlists)
+  //     console.log(playlists)
+  //   })
+  // }, [])
   return (
     <Fragment>
       <Navbar />
@@ -26,13 +44,7 @@ const Playlists = () => {
         <div className='cardContainer'>
           {userPlaylist &&
             userPlaylist.items.map(playlist => (
-              <Infocard
-                key={playlist.id}
-                img={playlist.images[0]?.url}
-                name={playlist.name}
-                type={playlist.type}
-                id={playlist.id}
-              />
+              <Infocard key={playlist.id} cardInfo={playlist} />
             ))}
         </div>
         <button
@@ -104,8 +116,8 @@ const Playlists = () => {
               <span className='inputRadio'></span>
               <br />
               <button
-                onClick={() => {
-                  makeNewPlaylist(newPlaylistInfo)
+                onClick={e => {
+                  makeNewPlaylist(e)
                   setModalDisplay(false)
                 }}
               >

@@ -5,6 +5,7 @@ import SpotifyWebApi from 'spotify-web-api-js'
 
 const GlobalState = props => {
   const initialState = {
+    spotifyApi: null,
     token: null,
     loading: false,
     user: null,
@@ -19,24 +20,28 @@ const GlobalState = props => {
 
   const [state, dispatch] = useReducer(GlobalReducer, initialState)
 
-  const spotify = new SpotifyWebApi()
+  const spotifyApi = new SpotifyWebApi()
 
   const setToken = accessToken => {
     console.log(
       '🚀 ~ file: GlobalState.js ~ line 23 ~ accessToken',
       accessToken
     )
-    spotify.setAccessToken(accessToken)
+    spotifyApi.setAccessToken(accessToken)
     dispatch({
       type: 'SET_TOKEN',
       payload: accessToken,
     })
-    console.log('**************')
+    dispatch({
+      type: 'INITIALIZE_SPOTIFY_API',
+      payload: spotifyApi,
+    })
+    getUser()
   }
 
   const getUser = () => {
     console.log('Getting User ...')
-    spotify.getMe().then(user => {
+    spotifyApi.getMe().then(user => {
       dispatch({
         type: 'SET_USER',
         payload: user,
@@ -44,29 +49,29 @@ const GlobalState = props => {
     })
   }
 
-  const getUserTopArtists = () => {
-    console.log('Getting user top artists ...')
-    spotify.getMyTopArtists().then(artists => {
-      dispatch({
-        type: 'SET_TOP_ARTISTS',
-        payload: artists,
-      })
-    })
-  }
+  // const getUserTopArtists = () => {
+  //   console.log('Getting user top artists ...')
+  //   spotify.getMyTopArtists().then(artists => {
+  //     dispatch({
+  //       type: 'SET_TOP_ARTISTS',
+  //       payload: artists,
+  //     })
+  //   })
+  // }
 
-  const getUserTopTracks = () => {
-    console.log('getting user top tracks ...')
-    spotify.getMyTopTracks().then(tracks => {
-      dispatch({
-        type: 'SET_TOP_TRACKS',
-        payload: tracks.items,
-      })
-    })
-  }
+  // const getUserTopTracks = () => {
+  //   console.log('getting user top tracks ...')
+  //   spotify.getMyTopTracks().then(tracks => {
+  //     dispatch({
+  //       type: 'SET_TOP_TRACKS',
+  //       payload: tracks.items,
+  //     })
+  //   })
+  // }
 
   const getUserPlaylists = () => {
     console.log('getting user playlist...')
-    spotify.getUserPlaylists(initialState.user?.id).then(playlists => {
+    spotifyApi.getUserPlaylists(initialState.user?.id).then(playlists => {
       dispatch({
         type: 'SET_USER_PLAYLISTS',
         payload: playlists,
@@ -74,64 +79,63 @@ const GlobalState = props => {
     })
   }
 
-  const getSongsFromPlaylist = id => {
-    console.log('getting songs from playlist...')
-    spotify.getPlaylistTracks(id).then(tracks => {
-      dispatch({
-        type: 'SET_PLAYLIST_SONGS',
-        payload: tracks.items,
-      })
-    })
-  }
+  // const getSongsFromPlaylist = id => {
+  //   console.log('getting songs from playlist...')
+  //   spotify.getPlaylistTracks(id).then(tracks => {
+  //     dispatch({
+  //       type: 'SET_PLAYLIST_SONGS',
+  //       payload: tracks.items,
+  //     })
+  //   })
+  // }
 
-  const getArtistsTopSongs = id => {
-    console.log("Getting artist's songs ...")
-    spotify.getArtistTopTracks(id, 'IN').then(tracks => {
-      dispatch({
-        type: 'SET_ARTISTS_TOP_TRACKS',
-        payload: tracks.tracks,
-      })
-    })
-  }
+  // const getArtistsTopSongs = id => {
+  //   console.log("Getting artist's songs ...")
+  //   spotify.getArtistTopTracks(id, 'IN').then(tracks => {
+  //     dispatch({
+  //       type: 'SET_ARTISTS_TOP_TRACKS',
+  //       payload: tracks.tracks,
+  //     })
+  //   })
+  // }
 
-  const searchSong = query => {
-    console.log(`searching song ${query}...`)
-    spotify.search(query, ['track'], { limit: 10 }).then(tracks => {
-      dispatch({
-        type: 'SET_SEARCH_RESULT',
-        payload: tracks,
-      })
-    })
-  }
+  // const searchSong = query => {
+  //   console.log(`searching song ${query}...`)
+  //   spotify.search(query, ['track'], { limit: 10 }).then(tracks => {
+  //     dispatch({
+  //       type: 'SET_SEARCH_RESULT',
+  //       payload: tracks,
+  //     })
+  //   })
+  // }
 
-  const addSongToPlaylist = (playlistId, tracksIds) => {
-    spotify.addTracksToPlaylist(playlistId, tracksIds).then(response => {
-      console.log(response)
-    })
-  }
+  // const addSongToPlaylist = (playlistId, tracksIds) => {
+  //   spotify.addTracksToPlaylist(playlistId, tracksIds).then(response => {
+  //     console.log(response)
+  //   })
+  // }
 
-  const removeSongFromPlaylist = (playlistId, tracksIds) => {
-    console.log('removing....')
-    spotify.removeTracksFromPlaylist(playlistId, tracksIds).then(res => {
-      console.log('Song removed')
-      alert('Song Removed')
-    })
-  }
+  // const removeSongFromPlaylist = (playlistId, tracksIds) => {
+  //   console.log('removing....')
+  //   spotify.removeTracksFromPlaylist(playlistId, tracksIds).then(res => {
+  //     console.log('Song removed')
+  //   })
+  // }
 
-  const makeNewPlaylist = playlistInfo => {
-    console.log(state.user.id)
-    console.log(playlistInfo)
-    spotify
-      .createPlaylist(state.user.id, {
-        name: playlistInfo.name,
-        description: playlistInfo.description,
-        public: playlistInfo.public,
-      })
-      .then(res => {
-        console.log(res)
-      })
-    getUserPlaylists()
-  }
+  // const makeNewPlaylist = playlistInfo => {
+  //   console.log(state.user.id)
+  //   console.log(playlistInfo)
+  //   spotify
+  //     .createPlaylist(state.user.id, {
+  //       name: playlistInfo.name,
+  //       description: playlistInfo.description,
+  //       public: playlistInfo.public,
+  //     })
+  //     .then(res => {
+  //       console.log(res)
+  //     })
+  //   getUserPlaylists()
+  // }
 
   const getTime = millisec => {
     var seconds = (millisec / 1000).toFixed(0)
@@ -155,27 +159,28 @@ const GlobalState = props => {
     <GlobalContext.Provider
       value={{
         token: state.token,
+        spotifyApi: state.spotifyApi,
         loading: state.loading,
         user: state.user,
         userPlaylist: state.userPlaylist,
-        userTopArtists: state.userTopArtists,
-        userTopTracks: state.userTopTracks,
-        searchResult: state.searchResult,
-        playlistTracks: state.playlistTracks,
-        currPlaylistId: state.currPlaylistId,
-        artistsTopTracks: state.artistsTopTracks,
+        // userTopArtists: state.userTopArtists,
+        // userTopTracks: state.userTopTracks,
+        // searchResult: state.searchResult,
+        // playlistTracks: state.playlistTracks,
+        // currPlaylistId: state.currPlaylistId,
+        // artistsTopTracks: state.artistsTopTracks,
         getTime,
         setToken,
         getUser,
-        getUserTopArtists,
-        getUserTopTracks,
-        getArtistsTopSongs,
-        searchSong,
         getUserPlaylists,
-        getSongsFromPlaylist,
-        addSongToPlaylist,
-        removeSongFromPlaylist,
-        makeNewPlaylist,
+        // getUserTopArtists,
+        // getUserTopTracks,
+        // getArtistsTopSongs,
+        // searchSong,
+        // getSongsFromPlaylist,
+        // addSongToPlaylist,
+        // removeSongFromPlaylist,
+        // makeNewPlaylist,
       }}
     >
       {props.children}

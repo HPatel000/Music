@@ -2,14 +2,9 @@ import { Favorite, PlaylistAdd } from '@material-ui/icons'
 import React, { Fragment, useContext } from 'react'
 import GlobalContext from '../context/GlobalContext'
 
-const Song = ({ songInfo, setTracks }) => {
-  const {
-    getTime,
-    addSongToPlaylist,
-    userPlaylist,
-    removeSongFromPlaylist,
-    currPlaylistId,
-  } = useContext(GlobalContext)
+const Song = ({ songInfo, setSomething, currPlaylistId }) => {
+  const { spotifyApi, getTime, userPlaylist } = useContext(GlobalContext)
+
   const song = {
     id: songInfo.id,
     trackName: songInfo.name,
@@ -17,6 +12,22 @@ const Song = ({ songInfo, setTracks }) => {
     img: songInfo.album.images[1].url,
     artists: songInfo.artists.map(artist => artist.name),
   }
+
+  const addToPLaylist = (playlistId, trackId) => {
+    console.log('Adding song to playlist ...')
+    spotifyApi.addTracksToPlaylist(playlistId, trackId).then(response => {
+      console.log('song added')
+    })
+  }
+
+  const removeSongFromPlaylist = (playlistId, trackId) => {
+    console.log('removing....')
+    spotifyApi.removeTracksFromPlaylist(playlistId, trackId).then(res => {
+      setSomething(res)
+      console.log('song removed')
+    })
+  }
+
   return (
     <div className='songInfo'>
       <img className='songImg' src={song.img} alt='' />
@@ -38,12 +49,11 @@ const Song = ({ songInfo, setTracks }) => {
               {playlist.id === currPlaylistId ? (
                 <button
                   className='removeFromPlaylistButton'
-                  onClick={() => {
+                  onClick={() =>
                     removeSongFromPlaylist(currPlaylistId, [
                       `spotify:track:${song.id}`,
                     ])
-                    setTracks(currPlaylistId)
-                  }}
+                  }
                 >
                   <small>Remove From</small>
                   <br />
@@ -52,7 +62,7 @@ const Song = ({ songInfo, setTracks }) => {
               ) : (
                 <button
                   onClick={() =>
-                    addSongToPlaylist(playlist.id, [`spotify:track:${song.id}`])
+                    addToPLaylist(playlist.id, [`spotify:track:${song.id}`])
                   }
                 >
                   <small>Add to</small>

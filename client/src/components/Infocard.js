@@ -2,7 +2,14 @@ import { PlayCircleFilledRounded } from '@material-ui/icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Infocard = ({ img, name, type, id }) => {
+const Infocard = ({ cardInfo }) => {
+  const info = {
+    name: cardInfo.name,
+    type: cardInfo.type,
+    id: cardInfo.id,
+    img: cardInfo.images[0]?.url,
+  }
+  const { name, type, id, img } = info
   return (
     <div className='infocard'>
       <img src={img} />
