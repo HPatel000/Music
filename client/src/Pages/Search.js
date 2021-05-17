@@ -22,8 +22,17 @@ const Search = () => {
     spotifyApi
       .search(query, ['track', 'artist', 'playlist', 'album'], { limit: 10 })
       .then(result => {
+        console.log(result)
         setSearchResult(result)
       })
+  }
+
+  const getPlaylistsByCategory = category => {
+    console.log('Getting Category playlist ...')
+    spotifyApi.getCategoryPlaylists(category).then(playlists => {
+      console.log(playlists)
+      setSearchResult(playlists)
+    })
   }
 
   useEffect(() => {
@@ -46,7 +55,7 @@ const Search = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className='search'>
+      <div className='search scrollable'>
         <div className='searchHeader'>
           <form action='#'>
             <input
@@ -60,54 +69,66 @@ const Search = () => {
             </button>
           </form>
         </div>
+
+        {searchResult && (
+          <Fragment>
+            {searchResult.tracks && (
+              <div className='songs'>
+                <h2 className='heading'>Songs</h2>
+                <div className='songsList'>
+                  {searchResult &&
+                    searchResult.tracks.items?.map(item => (
+                      <Song key={item.id} songInfo={item} />
+                    ))}
+                </div>
+              </div>
+            )}
+            {searchResult.artists && (
+              <div className='mainContainer'>
+                <h2 className='heading'>Artists</h2>
+                <div className='cardContainer'>
+                  {searchResult.artists.items?.map(artist => (
+                    <Infocard key={artist.id} cardInfo={artist} />
+                  ))}
+                </div>
+              </div>
+            )}
+            {searchResult.playlists && (
+              <div className='mainContainer'>
+                <h2 className='heading'>Playlists</h2>
+                <div className='cardContainer'>
+                  {searchResult.playlists.items?.map(playlist => (
+                    <Infocard key={playlist.id} cardInfo={playlist} />
+                  ))}
+                </div>
+              </div>
+            )}
+            {searchResult.albums && (
+              <div className='mainContainer'>
+                <h2 className='heading'>Albums</h2>
+                <div className='cardContainer'>
+                  {searchResult.albums.items?.map(album => (
+                    <Infocard key={album.id} cardInfo={album} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </Fragment>
+        )}
         {categories && (
           <Fragment>
-            <h3 className='categorySearchTitle'>Search by Category</h3>
+            <h2 className='heading'>Search by Category</h2>
             <div className='categoryCardContainer'>
               {categories?.items?.map(item => (
-                <div className='categoryCard' key={item.id}>
+                <div
+                  className='categoryCard'
+                  key={item.id}
+                  onClick={() => getPlaylistsByCategory(item.id)}
+                >
                   <img src={item.icons[0].url} alt='' />
                   <p>{item.name}</p>
                 </div>
               ))}
-            </div>
-          </Fragment>
-        )}
-
-        {searchResult && (
-          <Fragment>
-            <div className='songs'>
-              <h2>Songs</h2>
-              <div className='songsList'>
-                {searchResult &&
-                  searchResult.tracks.items?.map(item => (
-                    <Song key={item.id} songInfo={item} />
-                  ))}
-              </div>
-            </div>
-            <div className='mainContainer'>
-              <h2>Artists</h2>
-              <div className='cardContainer'>
-                {searchResult.artists.items?.map(artist => (
-                  <Infocard key={artist.id} cardInfo={artist} />
-                ))}
-              </div>
-            </div>
-            <div className='mainContainer'>
-              <h2>Playlists</h2>
-              <div className='cardContainer'>
-                {searchResult.playlists.items?.map(playlist => (
-                  <Infocard key={playlist.id} cardInfo={playlist} />
-                ))}
-              </div>
-            </div>
-            <div className='mainContainer'>
-              <h2>Albums</h2>
-              <div className='cardContainer'>
-                {searchResult.albums.items?.map(album => (
-                  <Infocard key={album.id} cardInfo={album} />
-                ))}
-              </div>
             </div>
           </Fragment>
         )}

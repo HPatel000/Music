@@ -1,5 +1,5 @@
 import { PlayCircleFilledRounded } from '@material-ui/icons'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
 const Infocard = ({ cardInfo }) => {
@@ -14,11 +14,14 @@ const Infocard = ({ cardInfo }) => {
     <div className='infocard'>
       <img src={img} />
       <h4>{name}</h4>
-      <p>{type}</p>
+      {type === 'playlist' && (
+        <Fragment>
+          <p>By {cardInfo.owner.display_name}</p>
+        </Fragment>
+      )}
       <Link
         to={{
           pathname: `/${type}/${id}`,
-          data: [name, img],
         }}
       >
         <PlayCircleFilledRounded className='infocardPlayBtn' />

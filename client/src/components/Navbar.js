@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 const Navbar = () => {
   return (
     <div className='navbar'>
-      <h1>Music</h1>
+      <h2 className='heading'>Music</h2>
       <div className='navItems'>
         <NavLink
           exact

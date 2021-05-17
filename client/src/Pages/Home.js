@@ -5,7 +5,8 @@ import Infocard from '../components/Infocard'
 import Song from '../components/Song'
 
 const Home = () => {
-  const { token, spotifyApi, getUserPlaylists } = useContext(GlobalContext)
+  const { token, spotifyApi, getUserPlaylists, user } =
+    useContext(GlobalContext)
   const [userTopArtists, setUserTopArtists] = useState(null)
   const [userTopTracks, setUserTopTracks] = useState(null)
   useEffect(() => {
@@ -22,17 +23,17 @@ const Home = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className='home'>
-        <div className='mainContainer'>
-          <h2>Top Artists</h2>
+      <div className='home scrollable'>
+        <div className='mainContainer scrollable'>
+          <h2 className='heading'>{user?.display_name}'s Top Artists</h2>
           <div className='cardContainer'>
             {userTopArtists?.items.map(artist => (
               <Infocard key={artist.id} cardInfo={artist} />
             ))}
           </div>
         </div>
-        <div className='songs'>
-          <h2>Top Tracks</h2>
+        <div className='songs scrollable'>
+          <h2 className='heading'>{user?.display_name}'s Top Tracks</h2>
           <div className='songsList'>
             {userTopTracks?.map(item => (
               <Song key={item.id} songInfo={item} setTracks={null} />

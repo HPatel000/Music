@@ -7,15 +7,17 @@ import GlobalContext from '../context/GlobalContext'
 const Playlists = () => {
   const { spotifyApi, user, userPlaylist, getUserPlaylists } =
     useContext(GlobalContext)
+
   const [modalDisplay, setModalDisplay] = useState(false)
-  // const [userPlaylist, setUserPLaylist] = useState(null)
   const [newPlaylistInfo, setNewPlaylistInfo] = useState({
     name: '',
     description: '',
     public: false,
   })
+
   const onChange = e =>
     setNewPlaylistInfo({ ...newPlaylistInfo, [e.target.name]: e.target.value })
+
   const makeNewPlaylist = e => {
     e.preventDefault()
     console.log(newPlaylistInfo)
@@ -30,17 +32,12 @@ const Playlists = () => {
         getUserPlaylists()
       })
   }
-  // useEffect(() => {
-  //   spotifyApi.getUserPlaylists(user?.id).then(playlists => {
-  //     setUserPLaylist(playlists)
-  //     console.log(playlists)
-  //   })
-  // }, [])
+
   return (
     <Fragment>
       <Navbar />
-      <div className='mainContainer'>
-        <h2>Uniquely Yours!</h2>
+      <div className='mainContainer scrollable'>
+        <h2 className='heading'>Uniquely Yours!</h2>
         <div className='cardContainer'>
           {userPlaylist &&
             userPlaylist.items.map(playlist => (

@@ -9,7 +9,7 @@ const Song = ({ songInfo, setSomething, currPlaylistId }) => {
     id: songInfo.id,
     trackName: songInfo.name,
     duration: songInfo.duration_ms,
-    img: songInfo.album.images[1].url,
+    img: songInfo.album?.images[0]?.url,
     artists: songInfo.artists.map(artist => artist.name),
   }
 
