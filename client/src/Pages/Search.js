@@ -1,5 +1,11 @@
 import { SearchRounded } from '@material-ui/icons'
-import React, { Fragment, useContext, useEffect, useState } from 'react'
+import React, {
+  createRef,
+  Fragment,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import Infocard from '../components/Infocard'
 import Navbar from '../components/Navbar'
 import Song from '../components/Song'
@@ -7,6 +13,7 @@ import GlobalContext from '../context/GlobalContext'
 
 const Search = () => {
   const { spotifyApi } = useContext(GlobalContext)
+  const scrollRef = createRef()
 
   const [query, setQuery] = useState('')
   const [categories, setCategories] = useState(null)
@@ -29,6 +36,10 @@ const Search = () => {
 
   const getPlaylistsByCategory = category => {
     console.log('Getting Category playlist ...')
+    scrollRef.current.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
     spotifyApi.getCategoryPlaylists(category).then(playlists => {
       console.log(playlists)
       setSearchResult(playlists)
@@ -55,18 +66,18 @@ const Search = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className='search scrollable'>
+      <div className='search scrollable' ref={scrollRef}>
         <div className='searchHeader'>
           <form action='#'>
+            <button className='searchBtn' onClick={e => searchQuery(e)}>
+              <SearchRounded className='searchIcon' />
+            </button>
             <input
-              type='text'
+              type='search'
               value={query}
               onChange={queryChange}
               placeholder='Search'
             />
-            <button className='searchBtn' onClick={e => searchQuery(e)}>
-              <SearchRounded className='searchIcon' />
-            </button>
           </form>
         </div>
 

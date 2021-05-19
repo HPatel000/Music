@@ -24,22 +24,27 @@ const Home = () => {
     <Fragment>
       <Navbar />
       <div className='home scrollable'>
-        <div className='mainContainer scrollable'>
-          <h2 className='heading'>{user?.display_name}'s Top Artists</h2>
-          <div className='cardContainer'>
-            {userTopArtists?.items.map(artist => (
-              <Infocard key={artist.id} cardInfo={artist} />
-            ))}
+        {userTopArtists && user && (
+          <div className='mainContainer scrollable'>
+            <h2 className='heading'>{user?.display_name}'s Top Artists</h2>
+            <div className='cardContainer'>
+              {userTopArtists?.items.map(artist => (
+                <Infocard key={artist.id} cardInfo={artist} />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className='songs scrollable'>
-          <h2 className='heading'>{user?.display_name}'s Top Tracks</h2>
-          <div className='songsList'>
-            {userTopTracks?.map(item => (
-              <Song key={item.id} songInfo={item} setTracks={null} />
-            ))}
+        )}
+
+        {userTopTracks && user && (
+          <div className='songs scrollable'>
+            <h2 className='heading'>{user?.display_name}'s Top Tracks</h2>
+            <div className='songsList'>
+              {userTopTracks?.map(item => (
+                <Song key={item.id} songInfo={item} setTracks={null} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Fragment>
   )

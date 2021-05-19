@@ -6,7 +6,7 @@ import GlobalContext from '../context/GlobalContext'
 
 const Tracks = () => {
   const { id, type } = useParams()
-  const { spotifyApi } = useContext(GlobalContext)
+  const { spotifyApi, formatNumber } = useContext(GlobalContext)
 
   const [something, setSomething] = useState('something')
   const [tracks, setTracks] = useState(null)
@@ -73,7 +73,7 @@ const Tracks = () => {
             <div className='songsHeadingInfo'>
               <p>{artistData.type}</p>
               <h2 className='heading'>{artistData.name}</h2>
-              <p>Followers : {artistData.followers.total}</p>
+              <p>Followers : {formatNumber(artistData.followers.total)}</p>
               {artistData.genres.length > 0 && (
                 <p>
                   Genres:{' '}

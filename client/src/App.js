@@ -8,7 +8,7 @@ import { useContext, useEffect } from 'react'
 import GlobalContext from './context/GlobalContext'
 import Search from './Pages/Search'
 import Tracks from './Pages/Tracks'
-import Shows from './Pages/Shows'
+import Library from './Pages/Library'
 
 const code = new URLSearchParams(window.location.search).get('code')
 
@@ -27,8 +27,8 @@ function App() {
             <Route exact path='/:type/:id' component={Tracks} />
             <Route exact path='/:type/:id' component={Tracks} />
             <Route exact path='/search' component={Search} />
+            <Route exact path='/yourlibrary' component={Library} />
             <Route exact path='/playlists' component={Playlists} />
-            <Route exact path='/shows' component={Shows} />
             <Route exact path='/' component={Home} />
             <Route path='*' component={Home} />
           </Switch>

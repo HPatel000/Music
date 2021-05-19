@@ -304,7 +304,7 @@ body {
 }
 
 .songsHeadingInfo h2 {
-  font-size: clamp(4vw, 6vw, 8vw);
+  font-size: 5vw;
   font-weight: bold;
 }
 
@@ -350,7 +350,6 @@ body {
 
 .songImg {
   height: 6rem;
-  width: 6rem;
   border-radius: 3px;
   grid-column: 1 / 2;
   justify-self: start;
@@ -476,9 +475,9 @@ body {
 }
 
 .search input {
-  margin-right: 2rem;
-  padding: 1rem 3rem;
-  width: 50%;
+  margin-left: -3rem;
+  padding: 1rem 1rem 1rem 5rem;
+  width: 60%;
   font-size: 2rem;
   border-radius: 5rem;
   background-color: rgba(var(--GREY), 0.8);
@@ -491,7 +490,24 @@ body {
 .search input:focus {
   outline: none;
   background-color: var(--grey);
-  width: 75%;
+  width: 80%;
+}
+
+.searchBtn {
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: var(--dark);
+  transform: scale(1.5);
+  cursor: pointer;
+}
+.search button:focus {
+  outline: none;
+  color: var(--pink);
+}
+
+.search .searchIcon {
+  transform: scale(1.3);
 }
 
 .categoryCardContainer {
@@ -532,24 +548,6 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   color: var(--grey);
-}
-
-.searchBtn {
-  margin-left: -5rem;
-  border-radius: 50%;
-  border: none;
-  background-color: transparent;
-  color: var(--dark);
-  transform: scale(1.5);
-  cursor: pointer;
-}
-.search button:focus {
-  outline: none;
-  color: var(--pink);
-}
-
-.search .searchIcon {
-  transform: scale(1.3);
 }
 
 /* ***************************** */
@@ -644,69 +642,68 @@ body {
   top: 50%;
   transform: translate(-50%, -80%);
   font-size: 2rem;
-  background-color: rgba(var(--GREY), 0.5);
-  padding: 3rem 6rem 3rem 3rem;
+  background-color: rgba(var(--GREY), 0.8);
+  padding: 3rem 6rem;
   width: max-content;
-  outline: 5px solid rgba(var(--GREY), 0.8);
-  outline-offset: 5px;
+  outline: 3px solid var(--grey);
+  outline-offset: 3px;
   box-shadow: 5px 5px 15px 0 rgba(var(--GREY), 0.1);
   animation: modal 0.2s ease-in-out;
 }
 
 .newPlaylistForm label {
   font-weight: bold;
+  color: var(--dark);
 }
 
 .newPlaylistForm input {
   margin-bottom: 2rem;
   margin-left: 1rem;
   padding: 0.5rem;
-  background-color: rgba(var(--DARK), 0.1);
+  background-color: rgba(var(--DARK), 0);
   border: none;
   border-bottom: 2px solid var(--dark);
   border-radius: 0.2rem;
-  transition: background-color 0.2s ease-in-out;
+  transition: border-bottom 0.1s ease-in-out;
 }
 .newPlaylistForm input:focus {
   outline: none;
-  background-color: rgba(var(--DARK), 0.2);
+  background-color: rgba(var(--DARK), 0.05);
 }
 
 .newPlaylistForm button {
-  padding: 1rem 2rem;
+  padding: 1rem;
+  width: 100%;
   margin-top: 2rem;
-  background-color: var(--dark);
+  background-color: var(--yellow);
   border: none;
   font-size: 2rem;
-  color: var(--grey);
+  font-weight: bold;
+  color: var(--dark);
   border-radius: 0.5rem;
   cursor: pointer;
 }
 
 .newPlaylistForm button:focus,
 .newPlaylistForm button:hover {
-  box-shadow: 0px 0px 10px 0px rgba(var(--DARK), 0.5);
+  box-shadow: 2px 2px 5px 0px rgba(var(--DARK), 0.5);
 }
 
 .modalClose {
   position: absolute;
-  right: -2.5rem;
-  top: -2.5rem;
-  height: 5rem;
-  width: 5rem;
-  border-radius: 50%;
-  background-color: rgba(var(--DARK), 0.7);
-  backdrop-filter: blur(5px);
-  color: var(--grey);
+  right: 0;
+  top: 0;
+  height: 3rem;
+  width: 3rem;
+  background-color: transparent;
+  color: var(--dark);
   border: none;
-  float: right;
-  font-size: 4rem;
-  font-weight: light;
+  font-size: 3rem;
   cursor: pointer;
 }
 
 .modalClose:hover,
 .modalClose:focus {
   outline: none;
-  background-color: var(--dark);
+  color: var(--pink);
 }

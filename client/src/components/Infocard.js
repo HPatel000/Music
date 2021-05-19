@@ -14,10 +14,10 @@ const Infocard = ({ cardInfo }) => {
     <div className='infocard'>
       <img src={img} />
       <h4>{name}</h4>
-      {type === 'playlist' && (
-        <Fragment>
-          <p>By {cardInfo.owner.display_name}</p>
-        </Fragment>
+      {type === 'playlist' ? (
+        <p>By {cardInfo.owner.display_name}</p>
+      ) : (
+        <p>{cardInfo.type}</p>
       )}
       <Link
         to={{
