@@ -1,9 +1,10 @@
 import React from 'react'
+require('dotenv').config()
 
 const authEndpoint = 'https://accounts.spotify.com/authorize'
-const clientId = 'f8a20825f0214028b72b59cd14a4ac2e'
+const clientId = process.env.CLIENT_ID
 
-const redirectUri = 'http://localhost:3000/'
+const redirectUri = process.env.REDIRECT_URI
 const scopes = [
   'user-read-email',
   'user-read-private',
