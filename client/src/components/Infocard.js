@@ -11,22 +11,24 @@ const Infocard = ({ cardInfo }) => {
   }
   const { name, type, id, img } = info
   return (
-    <div className='infocard'>
-      <img src={img} />
-      <h4>{name}</h4>
-      {type === 'playlist' ? (
-        <p>By {cardInfo.owner.display_name}</p>
-      ) : (
-        <p>{cardInfo.type}</p>
-      )}
-      <Link
-        to={{
-          pathname: `/${type}/${id}`,
-        }}
-      >
+    <Link
+      style={{ textDecoration: 'none' }}
+      to={{
+        pathname: `/${type}/${id}`,
+      }}
+    >
+      <div className='infocard'>
+        <img src={img} />
+        <h4>{name}</h4>
+        {type === 'playlist' ? (
+          <p>By {cardInfo.owner.display_name}</p>
+        ) : (
+          <p>{cardInfo.type}</p>
+        )}
+
         <PlayCircleFilledRounded className='infocardPlayBtn' />
-      </Link>
-    </div>
+      </div>
+    </Link>
   )
 }
 
