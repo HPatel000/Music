@@ -10,7 +10,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ extended: false }))
 
-app.post('/refresh', (req, res) => {
+app.post('/api/refresh', (req, res) => {
   const refreshToken = req.body.refreshToken
   const spotifyApi = new spotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
@@ -33,7 +33,7 @@ app.post('/refresh', (req, res) => {
     })
 })
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   const code = req.body.code
   const spotifyApi = new spotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
