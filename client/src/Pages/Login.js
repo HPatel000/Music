@@ -1,10 +1,9 @@
 import React from 'react'
-require('dotenv').config()
 
 const authEndpoint = 'https://accounts.spotify.com/authorize'
-const clientId = process.env.CLIENT_ID
+const clientId = 'f8a20825f0214028b72b59cd14a4ac2e'
 
-const redirectUri = process.env.REDIRECT_URI
+const redirectUri = 'https://reactjs-music.herokuapp.com'
 const scopes = [
   'user-read-email',
   'user-read-private',
