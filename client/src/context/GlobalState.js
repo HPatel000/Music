@@ -29,6 +29,10 @@ const GlobalState = props => {
     getUser()
   }
 
+  // spotifyApi.getRecommendations()
+  // // spotifyApi.getNewReleases
+  // // spotifyApi.getRecommendations
+
   const getUser = () => {
     console.log('Getting User ...')
     spotifyApi.getMe().then(user => {

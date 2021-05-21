@@ -5,16 +5,12 @@ import Song from '../components/Song'
 import GlobalContext from '../context/GlobalContext'
 
 const Library = () => {
-  const { spotifyApi, userPlaylist } = useContext(GlobalContext)
-  const [recentSongs, setRecentSongs] = useState(null)
+  const { spotifyApi, userPlaylist, user } = useContext(GlobalContext)
   const [savedAlbums, setSavedAlbums] = useState(null)
   const [followedArtist, setFollowedArtist] = useState(null)
+  const [userTopTracks, setUserTopTracks] = useState(null)
 
   useEffect(() => {
-    spotifyApi.getMyRecentlyPlayedTracks().then(tracks => {
-      console.log(tracks)
-      setRecentSongs(tracks.items)
-    })
     spotifyApi.getMySavedAlbums().then(albums => {
       console.log(albums)
       setSavedAlbums(albums)
@@ -22,6 +18,9 @@ const Library = () => {
     spotifyApi.getFollowedArtists().then(artists => {
       console.log(artists)
       setFollowedArtist(artists.artists)
+    })
+    spotifyApi.getMyTopTracks().then(tracks => {
+      setUserTopTracks(tracks.items)
     })
   }, [])
 
@@ -61,12 +60,12 @@ const Library = () => {
           </div>
         )}
 
-        {recentSongs && (
-          <div className='songs'>
-            <h2 className='heading'>Recently Played</h2>
+        {userTopTracks && user && (
+          <div className='songs scrollable'>
+            <h2 className='heading'>{user?.display_name}'s Top Tracks</h2>
             <div className='songsList'>
-              {recentSongs?.map(item => (
-                <Song key={item.played_at} songInfo={item.track} />
+              {userTopTracks?.map(item => (
+                <Song key={item.id} songInfo={item} setTracks={null} />
               ))}
             </div>
           </div>

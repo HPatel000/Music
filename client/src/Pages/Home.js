@@ -8,16 +8,18 @@ const Home = () => {
   const { token, spotifyApi, getUserPlaylists, user } =
     useContext(GlobalContext)
   const [userTopArtists, setUserTopArtists] = useState(null)
-  const [userTopTracks, setUserTopTracks] = useState(null)
+  const [newReleases, setNewReleases] = useState(null)
   useEffect(() => {
     if (token !== null) {
       spotifyApi.getMyTopArtists().then(artists => {
         setUserTopArtists(artists)
       })
-      spotifyApi.getMyTopTracks().then(tracks => {
-        setUserTopTracks(tracks.items)
-      })
+
       getUserPlaylists()
+      spotifyApi.getNewReleases().then(res => {
+        console.log(res)
+        setNewReleases(res.albums)
+      })
     }
   }, [token])
   return (
@@ -34,13 +36,12 @@ const Home = () => {
             </div>
           </div>
         )}
-
-        {userTopTracks && user && (
-          <div className='songs scrollable'>
-            <h2 className='heading'>{user?.display_name}'s Top Tracks</h2>
-            <div className='songsList'>
-              {userTopTracks?.map(item => (
-                <Song key={item.id} songInfo={item} setTracks={null} />
+        {newReleases && user && (
+          <div className='mainContainer scrollable'>
+            <h2 className='heading'>New Releases</h2>
+            <div className='cardContainer'>
+              {newReleases?.items.map(album => (
+                <Infocard key={album.id} cardInfo={album} />
               ))}
             </div>
           </div>

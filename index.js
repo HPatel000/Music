@@ -27,14 +27,13 @@ app.post('/refresh', (req, res) => {
       })
     })
     .catch(err => {
-      console.log('🚀 ~ file: index.js ~ line 28 ~ app.post ~ err', err)
+      console.log(err)
       res.sendStatus(400)
     })
 })
 
 app.post('/login', (req, res) => {
   const code = req.body.code
-  console.log('🚀 ~ file: index.js ~ line 37 ~ app.post ~ code', code)
   const spotifyApi = new spotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,
@@ -51,8 +50,13 @@ app.post('/login', (req, res) => {
       })
     })
     .catch(err => {
-      console.log('🚀 ~ file: index.js ~ line 51 ~ app.post ~ err', err)
+      console.log(err)
     })
 })
+
+// app.use(express.static(path.join(__dirname, 'client', 'build')))
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+// })
 
 app.listen(3001)

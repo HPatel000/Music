@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   HomeRounded,
   LibraryMusicRounded,
@@ -6,8 +6,11 @@ import {
   SearchRounded,
 } from '@material-ui/icons'
 import { NavLink } from 'react-router-dom'
+import GlobalContext from '../context/GlobalContext'
+import { Avatar } from '@material-ui/core'
 
 const Navbar = () => {
+  const { user } = useContext(GlobalContext)
   return (
     <div className='navbar'>
       <h2 className='heading'>Music</h2>
@@ -61,6 +64,12 @@ const Navbar = () => {
           </p>
         </NavLink>
       </div>
+      {user && (
+        <div className='navUser'>
+          <Avatar className='avatar' />
+          <h3 className='navUsername'>{user.display_name}</h3>
+        </div>
+      )}
     </div>
   )
 }
