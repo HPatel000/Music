@@ -9,6 +9,7 @@ import GlobalContext from './context/GlobalContext'
 import Search from './Pages/Search'
 import Tracks from './Pages/Tracks'
 import Library from './Pages/Library'
+import Alerts from './components/Alerts'
 
 const code = new URLSearchParams(window.location.search).get('code')
 
@@ -21,6 +22,7 @@ function App() {
   }, [accessToken])
   return (
     <div className='App'>
+      <Alerts />
       {code ? (
         <Router>
           <Switch>

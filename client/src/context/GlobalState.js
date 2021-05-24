@@ -10,6 +10,7 @@ const GlobalState = props => {
     loading: false,
     user: null,
     userPlaylist: null,
+    alerts: null,
   }
 
   const [state, dispatch] = useReducer(GlobalReducer, initialState)
@@ -51,6 +52,15 @@ const GlobalState = props => {
         payload: playlists,
       })
     })
+  }
+
+  const setAlert = (msg, timeout = 4000) => {
+    dispatch({
+      type: 'SET_ALERT',
+      payload: { msg },
+    })
+
+    setTimeout(() => dispatch({ type: 'REMOVE_ALERT' }), timeout)
   }
 
   const getTime = millisec => {
@@ -103,10 +113,12 @@ const GlobalState = props => {
         loading: state.loading,
         user: state.user,
         userPlaylist: state.userPlaylist,
+        alerts: state.alerts,
         getTime,
         setToken,
         getUser,
         getUserPlaylists,
+        setAlert,
         formatNumber,
       }}
     >

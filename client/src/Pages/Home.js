@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useEffect, useState } from 'react'
 import GlobalContext from '../context/GlobalContext'
 import Navbar from '../components/Navbar'
 import Infocard from '../components/Infocard'
-import Song from '../components/Song'
 
 const Home = () => {
   const { token, spotifyApi, getUserPlaylists, user } =

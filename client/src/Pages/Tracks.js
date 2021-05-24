@@ -23,7 +23,7 @@ const Tracks = () => {
   const [followPlaylist, setFollowPlaylist] = useState(false)
 
   const toggleFollowArtist = () => {
-    if (followArtist == 'Follow') {
+    if (followArtist === 'Follow') {
       spotifyApi.followArtists([`${id}`]).then(() => {
         setFollowArtist('Unfollow')
       })
@@ -72,7 +72,7 @@ const Tracks = () => {
         setPlaylistData(playlist)
       })
       spotifyApi.areFollowingPlaylist(id, [`${user.id}`]).then(res => {
-        if (!res[0] == false) {
+        if (!res[0] === false) {
           setFollowPlaylist(true)
         } else {
           setFollowPlaylist(false)
@@ -90,7 +90,7 @@ const Tracks = () => {
         setArtistData(artist)
       })
       spotifyApi.isFollowingArtists([`${id}`]).then(res => {
-        if (!res[0] == false) {
+        if (!res[0] === false) {
           setFollowArtist('Unfollow')
         }
       })
@@ -106,7 +106,7 @@ const Tracks = () => {
         setAlbumData(album)
       })
       spotifyApi.containsMySavedAlbums([`${id}`]).then(res => {
-        if (res[0] == true) {
+        if (res[0] === true) {
           setSaveAlbumBtn(true)
         }
       })

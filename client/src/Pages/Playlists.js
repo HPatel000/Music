@@ -1,11 +1,11 @@
 import { Add } from '@material-ui/icons'
-import React, { Fragment, useContext, useEffect, useState } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
 import Infocard from '../components/Infocard'
 import Navbar from '../components/Navbar'
 import GlobalContext from '../context/GlobalContext'
 
 const Playlists = () => {
-  const { spotifyApi, user, userPlaylist, getUserPlaylists } =
+  const { spotifyApi, user, userPlaylist, getUserPlaylists, setAlert } =
     useContext(GlobalContext)
 
   const [modalDisplay, setModalDisplay] = useState(false)
@@ -29,6 +29,7 @@ const Playlists = () => {
       })
       .then(res => {
         console.log(res)
+        setAlert('Playlist created')
         getUserPlaylists()
       })
   }

@@ -3,7 +3,8 @@ import React, { Fragment, useContext } from 'react'
 import GlobalContext from '../context/GlobalContext'
 
 const Song = ({ songInfo, setSomething, currPlaylistId }) => {
-  const { spotifyApi, getTime, userPlaylist } = useContext(GlobalContext)
+  const { spotifyApi, getTime, userPlaylist, setAlert } =
+    useContext(GlobalContext)
 
   const song = {
     id: songInfo.id,
@@ -15,8 +16,9 @@ const Song = ({ songInfo, setSomething, currPlaylistId }) => {
 
   const addToPLaylist = (playlistId, trackId) => {
     console.log('Adding song to playlist ...')
-    spotifyApi.addTracksToPlaylist(playlistId, trackId).then(response => {
+    spotifyApi.addTracksToPlaylist(playlistId, trackId).then(res => {
       console.log('song added')
+      setAlert('Song added to playlist')
     })
   }
 
@@ -24,6 +26,7 @@ const Song = ({ songInfo, setSomething, currPlaylistId }) => {
     console.log('removing....')
     spotifyApi.removeTracksFromPlaylist(playlistId, trackId).then(res => {
       setSomething(res)
+      setAlert('Song removed from the playlist')
       console.log('song removed')
     })
   }

@@ -61,6 +61,28 @@ body {
 /* ***************************** */
 /* ***************************** */
 /* ***************************** */
+/* ***********UTILITIES********* */
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+
+.alert {
+  position: absolute;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  top: 0;
+  left: 0;
+  background: var(--yellow);
+  color: var(--dark);
+  margin: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px 0 var(--yellow);
+  z-index: 20;
+}
+
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
 /* *************LOGIN*********** */
 /* ***************************** */
 /* ***************************** */
@@ -74,6 +96,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .Login h1 {
@@ -609,6 +632,7 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   color: var(--grey);
+  overflow-wrap: break-word;
 }
 
 /* ***************************** */
@@ -767,4 +791,135 @@ body {
 .modalClose:focus {
   outline: none;
   color: var(--pink);
+}
+
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+/* *********MEDIA QUERY********* */
+/* ***************************** */
+/* ***************************** */
+/* ***************************** */
+
+@media (max-width: 750px) {
+  html {
+    font-size: 50%;
+  }
+  body {
+    background: var(--dark);
+  }
+  .App {
+    flex-direction: column;
+  }
+  .heading {
+    padding: 1.5rem;
+  }
+  .navbar {
+    position: relative;
+    height: max-content;
+    box-shadow: 0px 1px 15px 0px var(--dark);
+  }
+  .navbar h2 {
+    height: max-content;
+  }
+
+  .navUser {
+    justify-content: flex-end;
+    top: 0;
+    border: none;
+    align-items: flex-start;
+  }
+
+  .navUsername {
+    padding-top: 1.5rem;
+  }
+
+  .navItems {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .navItem {
+    padding: 1rem;
+  }
+
+  .navItem::before {
+    transition: none;
+  }
+
+  .cardContainer {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    grid-gap: 1rem;
+  }
+
+  .infocardPlayBtn {
+    opacity: 1;
+    transform: scale(2);
+    transition: none;
+  }
+
+  .newPlaylistBtn {
+    margin-left: 1rem;
+  }
+
+  .songsHeading {
+    display: block;
+  }
+
+  .songsHeading img {
+    height: 50vw;
+    width: 50vw;
+  }
+
+  .songsHeadingInfo h2 {
+    padding-left: 0rem;
+  }
+
+  .songsHeadingInfo p {
+    padding-left: 0rem;
+  }
+
+  .glowBtn {
+    margin-top: 0;
+    transition: none;
+  }
+
+  .favBtn {
+    margin-top: 0;
+  }
+
+  .songsList {
+    padding: 0 2rem;
+  }
+
+  .songInfo {
+    transition: none;
+  }
+
+  .songAddToPlaylist {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+
+  .dropupContent button {
+    font-weight: lighter;
+    padding: 0.5rem 1rem;
+    transition: none;
+  }
+
+  .search input {
+    width: 90%;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .search input:focus {
+    width: 100%;
+  }
+
+  .categoryCardContainer {
+    padding: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
 }

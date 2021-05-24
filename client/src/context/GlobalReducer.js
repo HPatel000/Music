@@ -23,6 +23,17 @@ export default (state, action) => {
         ...state,
         userPlaylist: action.payload,
       }
+    case 'SET_ALERT':
+      console.log('action.payload')
+      return {
+        ...state,
+        alerts: action.payload,
+      }
+    case 'REMOVE_ALERT':
+      return {
+        ...state,
+        alerts: null,
+      }
     default:
       return state
   }
