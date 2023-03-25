@@ -15,10 +15,10 @@ const Playlists = () => {
     public: false,
   })
 
-  const onChange = e =>
+  const onChange = (e) =>
     setNewPlaylistInfo({ ...newPlaylistInfo, [e.target.name]: e.target.value })
 
-  const makeNewPlaylist = e => {
+  const makeNewPlaylist = (e) => {
     e.preventDefault()
     console.log(newPlaylistInfo)
     spotifyApi
@@ -27,7 +27,7 @@ const Playlists = () => {
         description: newPlaylistInfo.description,
         public: newPlaylistInfo.public,
       })
-      .then(res => {
+      .then((res) => {
         console.log(res)
         setAlert('Playlist created')
         getUserPlaylists()
@@ -41,7 +41,7 @@ const Playlists = () => {
         <h2 className='heading'>Uniquely Yours!</h2>
         <div className='cardContainer'>
           {userPlaylist &&
-            userPlaylist.items.map(playlist => (
+            userPlaylist.items.map((playlist) => (
               <Infocard key={playlist.id} cardInfo={playlist} />
             ))}
         </div>
@@ -65,6 +65,7 @@ const Playlists = () => {
             </button>
             <form action='#' className='newPlaylistForm'>
               <label htmlFor='playlistName'>Name </label>
+              <br />
               <input
                 type='text'
                 id='playlistName'
@@ -75,20 +76,21 @@ const Playlists = () => {
               />
               <br />
               <label htmlFor='playlistDescription'>Description </label>
-              <input
+              <br />
+              <textarea
                 type='text'
                 id='playlistDescription'
                 name='description'
                 onChange={onChange}
                 value={newPlaylistInfo.description}
-              />
+              ></textarea>
               <br />
               <label htmlFor='public'>Public </label>
               <input
                 type='radio'
                 id='public'
                 name='playlistType'
-                onChange={e =>
+                onChange={(e) =>
                   setNewPlaylistInfo({
                     ...newPlaylistInfo,
                     public: !newPlaylistInfo.public,
@@ -97,13 +99,12 @@ const Playlists = () => {
                 checked={newPlaylistInfo.public}
               />
               <span className='inputRadio'></span>
-              <br />
               <label htmlFor='private'>Private </label>
               <input
                 type='radio'
                 id='private'
                 name='playlistType'
-                onChange={e =>
+                onChange={(e) =>
                   setNewPlaylistInfo({
                     ...newPlaylistInfo,
                     public: !newPlaylistInfo.public,
@@ -114,7 +115,7 @@ const Playlists = () => {
               <span className='inputRadio'></span>
               <br />
               <button
-                onClick={e => {
+                onClick={(e) => {
                   makeNewPlaylist(e)
                   setModalDisplay(false)
                 }}
