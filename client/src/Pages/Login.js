@@ -3,7 +3,8 @@ import React from 'react'
 const authEndpoint = 'https://accounts.spotify.com/authorize'
 const clientId = 'f8a20825f0214028b72b59cd14a4ac2e'
 
-const redirectUri = 'https://reactjs-music.herokuapp.com'
+// const redirectUri = 'http://localhost:3000/'
+const redirectUri = 'https://spotify-clone-866b.onrender.com'
 const scopes = [
   'user-read-email',
   'user-read-private',
