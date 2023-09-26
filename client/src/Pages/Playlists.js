@@ -20,7 +20,6 @@ const Playlists = () => {
 
   const makeNewPlaylist = (e) => {
     e.preventDefault()
-    console.log(newPlaylistInfo)
     spotifyApi
       .createPlaylist(user?.id, {
         name: newPlaylistInfo.name,
@@ -28,7 +27,6 @@ const Playlists = () => {
         public: newPlaylistInfo.public,
       })
       .then((res) => {
-        console.log(res)
         setAlert('Playlist created')
         getUserPlaylists()
       })

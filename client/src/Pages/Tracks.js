@@ -61,17 +61,13 @@ const Tracks = () => {
 
   useEffect(() => {
     if (type === 'playlist') {
-      console.log('playlist')
-      console.log('getting songs from playlist...')
-      spotifyApi.getPlaylistTracks(id).then(tracks => {
-        console.log(tracks.items)
+      spotifyApi.getPlaylistTracks(id).then((tracks) => {
         setTracks(tracks.items)
       })
-      spotifyApi.getPlaylist(id).then(playlist => {
-        console.log(playlist)
+      spotifyApi.getPlaylist(id).then((playlist) => {
         setPlaylistData(playlist)
       })
-      spotifyApi.areFollowingPlaylist(id, [`${user.id}`]).then(res => {
+      spotifyApi.areFollowingPlaylist(id, [`${user.id}`]).then((res) => {
         if (!res[0] === false) {
           setFollowPlaylist(true)
         } else {
@@ -80,32 +76,26 @@ const Tracks = () => {
       })
     }
     if (type === 'artist') {
-      console.log("Getting artist's songs ...")
-      spotifyApi.getArtistTopTracks(id, 'IN').then(tracks => {
-        console.log(tracks.tracks)
+      spotifyApi.getArtistTopTracks(id, 'IN').then((tracks) => {
         setTracks(tracks.tracks)
       })
-      spotifyApi.getArtist(id).then(artist => {
-        console.log(artist)
+      spotifyApi.getArtist(id).then((artist) => {
         setArtistData(artist)
       })
-      spotifyApi.isFollowingArtists([`${id}`]).then(res => {
+      spotifyApi.isFollowingArtists([`${id}`]).then((res) => {
         if (!res[0] === false) {
           setFollowArtist('Unfollow')
         }
       })
     }
     if (type === 'album') {
-      console.log('Getting album songs ...')
-      spotifyApi.getAlbumTracks(id).then(tracks => {
-        console.log(tracks.items)
+      spotifyApi.getAlbumTracks(id).then((tracks) => {
         setTracks(tracks.items)
       })
-      spotifyApi.getAlbum(id).then(album => {
-        console.log(album)
+      spotifyApi.getAlbum(id).then((album) => {
         setAlbumData(album)
       })
-      spotifyApi.containsMySavedAlbums([`${id}`]).then(res => {
+      spotifyApi.containsMySavedAlbums([`${id}`]).then((res) => {
         if (res[0] === true) {
           setSaveAlbumBtn(true)
         }
@@ -157,7 +147,7 @@ const Tracks = () => {
                 {artistData.genres.length > 0 && (
                   <p>
                     Genres:{' '}
-                    {artistData.genres?.map(genre => (
+                    {artistData.genres?.map((genre) => (
                       <small key={genre}>{genre}</small>
                     ))}
                   </p>
@@ -181,7 +171,7 @@ const Tracks = () => {
                 {albumData.artists.length > 0 && (
                   <p>
                     Artists:{' '}
-                    {albumData.artists?.map(artist => (
+                    {albumData.artists?.map((artist) => (
                       <small key={artist.id}>{artist.name}</small>
                     ))}
                   </p>
@@ -201,7 +191,7 @@ const Tracks = () => {
         <div className='songsList'>
           {type === 'playlist' ? (
             <Fragment>
-              {tracks?.map(item => (
+              {tracks?.map((item) => (
                 <Song
                   key={item.track.id}
                   songInfo={item.track}
@@ -212,7 +202,7 @@ const Tracks = () => {
             </Fragment>
           ) : (
             <Fragment>
-              {tracks?.map(item => (
+              {tracks?.map((item) => (
                 <Song
                   key={item.id}
                   songInfo={item}

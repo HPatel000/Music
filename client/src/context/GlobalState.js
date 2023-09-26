@@ -3,7 +3,7 @@ import GlobalContext from './GlobalContext'
 import GlobalReducer from './GlobalReducer'
 import SpotifyWebApi from 'spotify-web-api-js'
 
-const GlobalState = props => {
+const GlobalState = (props) => {
   const initialState = {
     spotifyApi: null,
     token: null,
@@ -17,7 +17,7 @@ const GlobalState = props => {
 
   const spotifyApi = new SpotifyWebApi()
 
-  const setToken = accessToken => {
+  const setToken = (accessToken) => {
     spotifyApi.setAccessToken(accessToken)
     dispatch({
       type: 'SET_TOKEN',
@@ -35,8 +35,7 @@ const GlobalState = props => {
   // // spotifyApi.getRecommendations
 
   const getUser = () => {
-    console.log('Getting User ...')
-    spotifyApi.getMe().then(user => {
+    spotifyApi.getMe().then((user) => {
       dispatch({
         type: 'SET_USER',
         payload: user,
@@ -45,8 +44,7 @@ const GlobalState = props => {
   }
 
   const getUserPlaylists = () => {
-    console.log('getting user playlist...')
-    spotifyApi.getUserPlaylists(initialState.user?.id).then(playlists => {
+    spotifyApi.getUserPlaylists(initialState.user?.id).then((playlists) => {
       dispatch({
         type: 'SET_USER_PLAYLISTS',
         payload: playlists,
@@ -63,7 +61,7 @@ const GlobalState = props => {
     setTimeout(() => dispatch({ type: 'REMOVE_ALERT' }), timeout)
   }
 
-  const getTime = millisec => {
+  const getTime = (millisec) => {
     var seconds = (millisec / 1000).toFixed(0)
     var minutes = Math.floor(seconds / 60)
     var hours = ''
@@ -81,7 +79,7 @@ const GlobalState = props => {
     return minutes + ':' + seconds
   }
 
-  const formatNumber = num => {
+  const formatNumber = (num) => {
     if (num < 1000) {
       return num
     }

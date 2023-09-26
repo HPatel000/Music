@@ -19,29 +19,25 @@ const Search = () => {
   const [categories, setCategories] = useState(null)
   const [searchResult, setSearchResult] = useState(null)
 
-  const queryChange = e => {
+  const queryChange = (e) => {
     setQuery(e.target.value)
   }
 
-  const searchQuery = e => {
+  const searchQuery = (e) => {
     e.preventDefault()
-    console.log(`Searching for ${query}`)
     spotifyApi
       .search(query, ['track', 'artist', 'playlist', 'album'], { limit: 10 })
-      .then(result => {
-        console.log(result)
+      .then((result) => {
         setSearchResult(result)
       })
   }
 
-  const getPlaylistsByCategory = category => {
-    console.log('Getting Category playlist ...')
+  const getPlaylistsByCategory = (category) => {
     scrollRef.current.scrollTo({
       top: 0,
       behavior: 'smooth',
     })
-    spotifyApi.getCategoryPlaylists(category).then(playlists => {
-      console.log(playlists)
+    spotifyApi.getCategoryPlaylists(category).then((playlists) => {
       setSearchResult(playlists)
     })
   }
@@ -54,12 +50,9 @@ const Search = () => {
       })
       .then(
         function (data) {
-          console.log(data)
           setCategories(data.categories)
         },
-        function (err) {
-          console.log('Something went wrong!', err)
-        }
+        function (err) {}
       )
   }, [])
 
@@ -69,7 +62,7 @@ const Search = () => {
       <div className='search scrollable' ref={scrollRef}>
         <div className='searchHeader'>
           <form action='#'>
-            <button className='searchBtn' onClick={e => searchQuery(e)}>
+            <button className='searchBtn' onClick={(e) => searchQuery(e)}>
               <SearchRounded className='searchIcon' />
             </button>
             <input
@@ -88,7 +81,7 @@ const Search = () => {
                 <h2 className='heading'>Songs</h2>
                 <div className='songsList'>
                   {searchResult &&
-                    searchResult.tracks.items?.map(item => (
+                    searchResult.tracks.items?.map((item) => (
                       <Song key={item.id} songInfo={item} />
                     ))}
                 </div>
@@ -98,7 +91,7 @@ const Search = () => {
               <div className='mainContainer'>
                 <h2 className='heading'>Artists</h2>
                 <div className='cardContainer'>
-                  {searchResult.artists.items?.map(artist => (
+                  {searchResult.artists.items?.map((artist) => (
                     <Infocard key={artist.id} cardInfo={artist} />
                   ))}
                 </div>
@@ -108,7 +101,7 @@ const Search = () => {
               <div className='mainContainer'>
                 <h2 className='heading'>Playlists</h2>
                 <div className='cardContainer'>
-                  {searchResult.playlists.items?.map(playlist => (
+                  {searchResult.playlists.items?.map((playlist) => (
                     <Infocard key={playlist.id} cardInfo={playlist} />
                   ))}
                 </div>
@@ -118,7 +111,7 @@ const Search = () => {
               <div className='mainContainer'>
                 <h2 className='heading'>Albums</h2>
                 <div className='cardContainer'>
-                  {searchResult.albums.items?.map(album => (
+                  {searchResult.albums.items?.map((album) => (
                     <Infocard key={album.id} cardInfo={album} />
                   ))}
                 </div>
@@ -130,7 +123,7 @@ const Search = () => {
           <Fragment>
             <h2 className='heading'>Search by Category</h2>
             <div className='categoryCardContainer'>
-              {categories?.items?.map(item => (
+              {categories?.items?.map((item) => (
                 <div
                   className='categoryCard'
                   key={item.id}

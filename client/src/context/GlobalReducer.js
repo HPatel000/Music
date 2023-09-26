@@ -1,13 +1,11 @@
 export default (state, action) => {
   switch (action.type) {
     case 'SET_USER':
-      console.log(action.payload)
       return {
         ...state,
         user: action.payload,
       }
     case 'SET_TOKEN':
-      console.log(action.payload)
       return {
         ...state,
         token: action.payload,
@@ -18,13 +16,11 @@ export default (state, action) => {
         spotifyApi: action.payload,
       }
     case 'SET_USER_PLAYLISTS':
-      console.log(action.payload)
       return {
         ...state,
         userPlaylist: action.payload,
       }
     case 'SET_ALERT':
-      console.log('action.payload')
       return {
         ...state,
         alerts: action.payload,

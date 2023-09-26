@@ -11,23 +11,19 @@ const Song = ({ songInfo, setSomething, currPlaylistId }) => {
     trackName: songInfo.name,
     duration: songInfo.duration_ms,
     img: songInfo.album?.images[0]?.url,
-    artists: songInfo.artists.map(artist => artist.name),
+    artists: songInfo.artists.map((artist) => artist.name),
   }
 
   const addToPLaylist = (playlistId, trackId) => {
-    console.log('Adding song to playlist ...')
-    spotifyApi.addTracksToPlaylist(playlistId, trackId).then(res => {
-      console.log('song added')
+    spotifyApi.addTracksToPlaylist(playlistId, trackId).then((res) => {
       setAlert('Song added to playlist')
     })
   }
 
   const removeSongFromPlaylist = (playlistId, trackId) => {
-    console.log('removing....')
-    spotifyApi.removeTracksFromPlaylist(playlistId, trackId).then(res => {
+    spotifyApi.removeTracksFromPlaylist(playlistId, trackId).then((res) => {
       setSomething(res)
       setAlert('Song removed from the playlist')
-      console.log('song removed')
     })
   }
 
@@ -37,7 +33,7 @@ const Song = ({ songInfo, setSomething, currPlaylistId }) => {
       <div className='songName'>
         {song.trackName}
         <br />
-        {song.artists?.map(artist => (
+        {song.artists?.map((artist) => (
           <small key={artist}>{artist}</small>
         ))}
       </div>
@@ -47,7 +43,7 @@ const Song = ({ songInfo, setSomething, currPlaylistId }) => {
         <PlaylistAdd className='songAddToPlaylist' />
         <div className='dropupContent'>
           {/* <p>Add To Playlist</p> */}
-          {userPlaylist?.items.map(playlist => (
+          {userPlaylist?.items.map((playlist) => (
             <Fragment key={playlist.id}>
               {playlist.id === currPlaylistId ? (
                 <button

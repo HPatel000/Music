@@ -11,15 +11,13 @@ const Library = () => {
   const [userTopTracks, setUserTopTracks] = useState(null)
 
   useEffect(() => {
-    spotifyApi.getMySavedAlbums().then(albums => {
-      console.log(albums)
+    spotifyApi.getMySavedAlbums().then((albums) => {
       setSavedAlbums(albums)
     })
-    spotifyApi.getFollowedArtists().then(artists => {
-      console.log(artists)
+    spotifyApi.getFollowedArtists().then((artists) => {
       setFollowedArtist(artists.artists)
     })
-    spotifyApi.getMyTopTracks().then(tracks => {
+    spotifyApi.getMyTopTracks().then((tracks) => {
       setUserTopTracks(tracks.items)
     })
   }, [])
@@ -32,7 +30,7 @@ const Library = () => {
           <div className='mainContainer'>
             <h2 className='heading'>Albums</h2>
             <div className='cardContainer'>
-              {savedAlbums.items?.map(album => (
+              {savedAlbums.items?.map((album) => (
                 <Infocard key={album.album.id} cardInfo={album.album} />
               ))}
             </div>
@@ -42,7 +40,7 @@ const Library = () => {
           <div className='mainContainer'>
             <h2 className='heading'>Artists</h2>
             <div className='cardContainer'>
-              {followedArtist.items?.map(artist => (
+              {followedArtist.items?.map((artist) => (
                 <Infocard key={artist.id} cardInfo={artist} />
               ))}
             </div>
@@ -53,7 +51,7 @@ const Library = () => {
             <h2 className='heading'>Playlists</h2>
             <div className='cardContainer'>
               {userPlaylist &&
-                userPlaylist.items.map(playlist => (
+                userPlaylist.items.map((playlist) => (
                   <Infocard key={playlist.id} cardInfo={playlist} />
                 ))}
             </div>
@@ -64,7 +62,7 @@ const Library = () => {
           <div className='songs scrollable'>
             <h2 className='heading'>{user?.display_name}'s Top Tracks</h2>
             <div className='songsList'>
-              {userTopTracks?.map(item => (
+              {userTopTracks?.map((item) => (
                 <Song key={item.id} songInfo={item} setTracks={null} />
               ))}
             </div>
